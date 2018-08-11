@@ -15,8 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from tastypie.api import Api
+
+from todo.api.resources import TaskModelResource
+
+v1_api = Api(api_name='v1')
+v1_api.register(TaskModelResource())
 
 urlpatterns = [
 	path('todo/', include('todo.urls')),
     path('admin/', admin.site.urls),
+    path('api/', include(v1_api.urls)),
 ]
