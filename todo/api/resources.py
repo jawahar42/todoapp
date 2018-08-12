@@ -8,8 +8,11 @@ from tastypie.resources import ModelResource
 from tastypie.paginator import Paginator
 from tastypie.exceptions import BadRequest, ImmediateHttpResponse
 from tastypie.utils import trailing_slash
+from tastypie import fields
 
 class TaskModelResource(ModelResource):
+    parent_task = fields.ForeignKey('self', 'parent_task', null=True)
+
     class Meta:
         queryset = TaskModel.objects.all()
         allowed_methods = ['get', 'post']
